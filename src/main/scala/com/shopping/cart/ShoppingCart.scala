@@ -26,7 +26,11 @@ class ShoppingCart {
   }
 
   private def getTotal(items: List[Item]): Double = {
-    items.map(getValue).reduce( _ + _)
+    items.length match {
+      case 0 => 0
+      case 1 => getValue(items(0))
+      case _ => items.map(getValue).reduce( _ + _)
+    }
   }
 
   private def getDiscounts(items: List[Item]): Double = {
